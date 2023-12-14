@@ -13,6 +13,10 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
+  build: {
+    outDir: 'public',
+    // ... other build options ...
+  },
   server: {
 		proxy: {
 			'/api': {
@@ -22,5 +26,5 @@ export default defineConfig({
 				ws: true,
 			},
 		},
-	} 
+	}
 })
