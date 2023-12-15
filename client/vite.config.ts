@@ -14,7 +14,7 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: 'public',
+    outDir: '../server/public',
     // ... other build options ...
   },
   server: {

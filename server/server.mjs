@@ -1,11 +1,26 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+import cors from 'cors';
 const app = express();
 const port = 3000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 //const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
+
+// in order to deploy to HEROKU
+if(process.env.NODE_ENV !== 'production'){
+    app.use(express.static(path.join(__dirname, 'public')));
+
+    app.get('/.*/', (req, res) => res.sendFile(__dirname + '/public/index.html'));
+}
 
 //require('dotenv').config(); // needed to read our environment variables
 
